@@ -90,20 +90,20 @@ Pins: 	PC12-->LED4(PC6),PE3-->LED5(PC7)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	delay_ms(50);
-	if(GPIO_Pin==GPIO_PIN_12)
+	if(GPIO_Pin==GPIO_PIN_2)
 	{
-		if(GPIO_PIN_RESET==HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_12))
+		if(GPIO_PIN_RESET==HAL_GPIO_ReadPin(GPIOE,GPIO_PIN_2))
 		{
-			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_6);
-			if(led4_status==0)
+			HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+			if(led1_status==0)
 			{
-				Screen_SendStr("led4.val=1",FB_ON);
-				led4_status=1;
+				Screen_SendStr("led4.val=1",FB_ON);//REMAINDER OF PREVIOUS PIN SETUP
+				led1_status=1;
 			}
 			else
 			{
 				Screen_SendStr("led4.val=0",FB_ON);
-				led4_status=0;
+				led1_status=0;
 			}
 				
 		}//?? PC6
@@ -112,39 +112,33 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	{
 		if (GPIO_PIN_RESET == HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3))//PE3
 		{
-			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_7);
-			if(led5_status==0)
+			HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_2);
+			if(led2_status==0)
 			{
 				Screen_SendStr("led5.val=1",FB_ON);
-				led5_status=1;
+				led2_status=1;
 			}
 			else
 			{
 				Screen_SendStr("led5.val=0",FB_ON);
-				led5_status=0;
+				led2_status=0;
 			}
 		}//PC7
 	}
 	
 	
 	//CH455's input
-	if (GPIO_Pin == GPIO_PIN_13)
-	{
-		printf("CH455\r\n");
-		//PC13
-			CH455_KEY_RX_FLAG = 1;
-		
-			CH455_KEY_NUM = CH455_Key_Read();
-			__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_13);
-		
-	}			
+	// if (GPIO_Pin == GPIO_PIN_13)
+	// {
+	// 	printf("CH455\r\n");
+	// 	//PC13
+	// 		CH455_KEY_RX_FLAG = 1;
+	//
+	// 		CH455_KEY_NUM = CH455_Key_Read();
+	// 		__HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_13);
+	//
+	// }
 }
-
-
-
-
-
-
 
 
 
@@ -211,12 +205,14 @@ int main(void)
 	Write_Amplitude(0,1023);
 	Write_Phase(0,0);
 	//Serial_printf("DDS2\r\n");
-	
-	CH455_init();
-	CH455_Display(1,a);
-	CH455_Display(2,b);
-	CH455_Display(3,c);
-	CH455_Display(4,d);
+
+
+	//CH455 Matrix Display
+	// CH455_init();
+	// CH455_Display(1,a);
+	// CH455_Display(2,b);
+	// CH455_Display(3,c);
+	// CH455_Display(4,d);
 	
 	
 	

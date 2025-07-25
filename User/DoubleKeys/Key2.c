@@ -5,7 +5,7 @@
 #include "delay.h"
 
 
-uint8_t led4_status=0,led5_status=0;
+uint8_t led1_status=0,led2_status=0;
 
 //NORMAL IT APPROACH
 

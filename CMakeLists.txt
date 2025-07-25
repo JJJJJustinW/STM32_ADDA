@@ -32,7 +32,9 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 enable_language(C ASM)
 
 # Create an executable object type
-add_executable(${CMAKE_PROJECT_NAME})
+add_executable(${CMAKE_PROJECT_NAME}
+        User/ADC/ADC_Custom.c
+        User/ADC/ADC_Custom.h)
 
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
@@ -45,11 +47,25 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+        User/ADC/ADC_Custom.c
+        User/Serial/Serial.c
+        User/Delay/delay.c
+        User/IIC/myiic.c
+        User/DoubleKeys/Key2.c
+        User/CH455/ch455.c
+        User/DDS/AD9959.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+        User/ADC
+        User/Serial
+        User/Delay
+        User/IIC
+        User/DoubleKeys
+        User/CH455
+        User/DDS
 )
 
 # Add project symbols (macros)

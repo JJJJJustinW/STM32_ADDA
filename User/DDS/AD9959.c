@@ -20,7 +20,7 @@
 #define SDIO0_PIN GPIO_PIN_3
 #define UPDATE_PIN GPIO_PIN_4
 #define RESET_PIN GPIO_PIN_5
-#define GPIO_PORT GPIOA
+#define GPIO_PORT GPIOD
 
 u8 CSR_DATA0[1] = {0x10}; // 开 CH0
 u8 CSR_DATA1[1] = {0x20}; // 开 CH1
