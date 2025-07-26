@@ -197,8 +197,7 @@ int main(void)
 	HAL_TIM_Base_Start(&htim1);//tim1 init
 	HAL_ADC_Start_DMA(&hadc1,g_adc1_dma_data1,ADC_DATA_LENGTH);
 	
-	
-	//Serial_printf("before delay\r\n");
+	//printf("before delay\r\n");
 	delay_init(480);
 	delay_ms(10);
 	

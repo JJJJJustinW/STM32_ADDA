@@ -144,11 +144,43 @@ void Serial_SendStr_t(char *string,UART_HandleTypeDef *huart)
 /*
  * REPLACES the fputc() function used in the implementation of printf()
 */
+// int fputc(int ch,FILE *f)
+// {
+// 	Serial_SendByte(ch);
+// 	return ch;
+// }
+#if   defined( __GNUC__ )//GCC
+/*	With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+	set to 'Yes') calls __io_putchar() */
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#elif defined( __CC_ARM )//ARMCC
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#else
+#error "Unknown compiler"
+#endif
+static uint8_t s_usart_tmp;
+
+
+#if defined(__CC_ARM)
 int fputc(int ch,FILE *f)
 {
-	Serial_SendByte(ch);
+	s_usart_tmp=(uint8_t)(ch);
+	HAL_UART_Transmit(huart_debug,&s_usart_tmp,1,1);
+	//	HAL_UART_Transmit_IT(huart_debug,&s_usart_tmp,1);
 	return ch;
 }
+#elif defined( __GNUC__ )
+int __io_putchar(int ch)
+{
+	s_usart_tmp=(uint8_t)(ch);
+	HAL_UART_Transmit(huart_debug,&s_usart_tmp,1,1);
+	//	HAL_UART_Transmit_IT(huart_debug,&s_usart_tmp,1);
+	return ch;
+}
+#endif
+
+
+
 
 
 
