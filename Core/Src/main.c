@@ -198,7 +198,7 @@ int main(void)
 	HAL_ADC_Start_DMA(&hadc1,g_adc1_dma_data1,ADC_DATA_LENGTH);
 	
 	
-	//printf("before delay\r\n");
+	//Serial_printf("before delay\r\n");
 	delay_init(480);
 	delay_ms(10);
 	
@@ -239,7 +239,7 @@ int main(void)
 	while (1)
 	{
 	  
-	/* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 	ADC_DMA_Output();

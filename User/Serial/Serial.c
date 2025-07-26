@@ -180,7 +180,7 @@ void Serial_printf_t(UART_HandleTypeDef *huart, const char *formatted,...)
 	vsprintf(String,formatted,args);
 	va_end(args);
 	Serial_SendStr_t(String,huart);
-	Serial_printf(String);
+	Serial_SendStr(String);
 }
 
 

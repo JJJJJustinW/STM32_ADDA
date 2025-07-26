@@ -1,6 +1,7 @@
 //
 // Created by Penta on 2025/7/25.
 //
+#include <stdio.h>
 
 #include "ADC_Custom.h"
 
@@ -30,9 +31,11 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
 
 void ADC_DMA_Output(void)
 {
+    //Serial_printf("ADCDMA\r\n");
     if(g_adc1_dma_complete_flag == 1)//part1 of the data
     {
-        for(uint16_t itor_dma=0;itor_dma<1000;itor_dma++)
+        Serial_printf("dma1\r\n");
+        for(uint32_t itor_dma=0;itor_dma<1000;itor_dma++)
         {
             Serial_printf_t(huart_screen,"%ld\r\n",g_adc1_dma_data1[itor_dma]&0x0000ffff);//
         }
@@ -41,7 +44,7 @@ void ADC_DMA_Output(void)
     }
     if(g_adc1_dma_complete_flag == 2)//part2
     {
-        for(uint16_t itor_dma=1000;itor_dma<2000;itor_dma++)
+        for(uint32_t itor_dma=1000;itor_dma<2000;itor_dma++)
         {
             Serial_printf_t(huart_screen,"%ld\r\n",g_adc1_dma_data1[itor_dma]&0x0000ffff);//
         }
