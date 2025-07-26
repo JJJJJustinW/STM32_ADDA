@@ -70,7 +70,7 @@ Private var for DDS
 */
 uint32_t CW_fre = 30000000;//CW initial fre
 uint32_t CW_amp = 1023;//CW initial amp
-uint8_t a = 2,b=0,c=2,d=5;
+// uint8_t a = 2,b=0,c=2,d=5;//CH455
 
 
 /* USER CODE END PV */
@@ -214,7 +214,7 @@ int main(void)
 	//Serial_printf("DDS2\r\n");
 
 
-	//CH455 Matrix Display(OBSELETE)
+	//CH455 Matrix Display(OBSOLETE)
 	// CH455_init();
 	// CH455_Display(1,a);
 	// CH455_Display(2,b);

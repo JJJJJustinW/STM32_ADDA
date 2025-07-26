@@ -38,7 +38,7 @@ void ADC_DMA_Output(void)
         //Serial_printf("dma1\r\n");
         for(uint32_t itor_dma=0;itor_dma<1000;itor_dma++)
         {
-            Serial_printf_t(huart_screen,"%ld\r\n",g_adc1_dma_data1[itor_dma]&0x0000ffff);//
+            Serial_printf_t(huart_screen,"%d\r\n",g_adc1_dma_data1[itor_dma]&0x0000ffff);//
         }
         g_adc1_dma_complete_flag = 0;
         memset(&g_adc1_dma_data1[0],0,ADC_DATA_LENGTH/2);//Clear the stored data
@@ -47,7 +47,7 @@ void ADC_DMA_Output(void)
     {
         for(uint32_t itor_dma=1000;itor_dma<2000;itor_dma++)
         {
-            Serial_printf_t(huart_screen,"%ld\r\n",g_adc1_dma_data1[itor_dma]&0x0000ffff);//
+            Serial_printf_t(huart_screen,"%d\r\n",g_adc1_dma_data1[itor_dma]&0x0000ffff);//
         }
         g_adc1_dma_complete_flag = 0;
         memset(&g_adc1_dma_data1[1000],0,ADC_DATA_LENGTH/2);//Clear the stored data

@@ -182,8 +182,6 @@ int __io_putchar(int ch)
 
 
 
-
-
 /*
 *Encapsulated printf function for formatted strings to all ports.
 NOTE:
@@ -212,6 +210,8 @@ void Serial_printf_t(UART_HandleTypeDef *huart, const char *formatted,...)
 	vsprintf(String,formatted,args);
 	va_end(args);
 	Serial_SendStr_t(String,huart);
+
+	//Send to UART4
 	Serial_SendStr(String);
 }
 

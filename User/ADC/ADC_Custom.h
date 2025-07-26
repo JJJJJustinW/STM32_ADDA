@@ -8,7 +8,6 @@
 
 #include "adc.h"
 
-
 #define ADC_DATA_LENGTH  2000   //Sample Cnt 1000(2000/2)
 
 extern uint32_t g_adc1_dma_data1[ADC_DATA_LENGTH];
