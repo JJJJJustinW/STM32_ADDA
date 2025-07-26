@@ -264,30 +264,80 @@ void ADC_IRQHandler(void)
 /**
   * @brief This function handles UART4 global interrupt.
   */
-// void UART4_IRQHandler(void)
-// {
-//   /* USER CODE BEGIN UART4_IRQn 0 */
-//
-//   /* USER CODE END UART4_IRQn 0 */
-//   HAL_UART_IRQHandler(&huart4);
-//   /* USER CODE BEGIN UART4_IRQn 1 */
-//
-//   /* USER CODE END UART4_IRQn 1 */
-// }
+void UART4_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART4_IRQn 0 */
+
+  uint32_t timeout=0;
+  uint32_t maxDelay=0x1FFFF;
+
+  /* USER CODE END UART4_IRQn 0 */
+  HAL_UART_IRQHandler(&huart4);
+  /* USER CODE BEGIN UART4_IRQn 1 */
+
+  timeout=0;
+  while (HAL_UART_GetState(huart_debug) != HAL_UART_STATE_READY)//�ȴ�����
+  {
+    timeout++;////��ʱ����
+    if(timeout>maxDelay)
+    {
+      //reply_er();
+      break;
+    }
+  }
+
+  timeout=0;
+  while(HAL_UART_Receive_IT(huart_debug, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
+  {
+    timeout++; //��ʱ����
+    if(timeout>maxDelay)
+    {
+      //reply_er();
+      break;
+    }
+  }
+
+  /* USER CODE END UART4_IRQn 1 */
+}
 
 /**
   * @brief This function handles UART5 global interrupt.
   */
-// void UART5_IRQHandler(void)
-// {
-//   /* USER CODE BEGIN UART5_IRQn 0 */
-//
-//   /* USER CODE END UART5_IRQn 0 */
-//   HAL_UART_IRQHandler(&huart5);
-//   /* USER CODE BEGIN UART5_IRQn 1 */
-//
-//   /* USER CODE END UART5_IRQn 1 */
-// }
+void UART5_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART5_IRQn 0 */
+
+  uint32_t timeout=0;
+  uint32_t maxDelay=0x1FFFF;
+
+  /* USER CODE END UART5_IRQn 0 */
+  HAL_UART_IRQHandler(&huart5);
+  /* USER CODE BEGIN UART5_IRQn 1 */
+
+  timeout=0;
+  while (HAL_UART_GetState(huart_screen) != HAL_UART_STATE_READY)//�ȴ�����
+  {
+    timeout++;////��ʱ����
+    if(timeout>maxDelay)
+    {
+      //reply_er();
+      break;
+    }
+  }
+
+  timeout=0;
+  while(HAL_UART_Receive_IT(huart_screen, (uint8_t *)aRxBuffer5, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
+  {
+    timeout++; //��ʱ����
+    if(timeout>maxDelay)
+    {
+      //reply_er();
+      break;
+    }
+  }
+
+  /* USER CODE END UART5_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 

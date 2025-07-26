@@ -2,17 +2,18 @@
 #include "usart.h"
 #include "Serial.h"
 
-UART_HandleTypeDef *huart_debug = &huart4; ///< Debug´®¿Ú
+UART_HandleTypeDef *huart_debug = &huart4; ///< Debugï¿½ï¿½ï¿½ï¿½
 UART_HandleTypeDef *huart_screen = &huart5;
 
 uint8_t tmp_Byte=0;//Used to avoid empty pointer
 
 
-
-/////////////////////////////UART SEND
+//////////////////////////////////////////////////////////////////////
+/*---------------------------UART SEND------------------------------*/
+//////////////////////////////////////////////////////////////////////
 /*
-The function to send a single byte of information to tx port
-*/
+ * Send uint8_t content to UART4(huart_debug).
+ */
 void Serial_SendByte(uint8_t Byte)
 {
 	tmp_Byte=Byte;
@@ -22,6 +23,9 @@ void Serial_SendByte(uint8_t Byte)
 	
 }
 
+/*
+ * Send uint8_t content to a given UART port.
+ */
 void Serial_SendByte_t(uint8_t Byte,UART_HandleTypeDef *huart)
 {
 	tmp_Byte=Byte;
@@ -34,7 +38,7 @@ void Serial_SendByte_t(uint8_t Byte,UART_HandleTypeDef *huart)
 
 
 /*
-Send arrays of uint8_t items
+Send arrays of uint8_t items to UART4.
 */
 void Serial_SendArr(uint8_t *array,uint16_t length)
 {
@@ -45,6 +49,9 @@ void Serial_SendArr(uint8_t *array,uint16_t length)
 	
 }
 
+/*
+ * Send arrays to a given UART port.
+ */
 void Serial_SendArr_t(uint8_t *array,uint16_t length,UART_HandleTypeDef *huart)
 {
 	for(uint16_t itor_sndarr=0;itor_sndarr<length;itor_sndarr++)
@@ -70,7 +77,7 @@ void Serial_SendArr_t(uint8_t *array,uint16_t length,UART_HandleTypeDef *huart)
 
 
 /*
-Implement the power through RECURSION
+Implement the mathematical power through RECURSION
 */
 uint32_t Serial_Power(uint32_t base,uint32_t exp)
 {
@@ -87,7 +94,7 @@ uint32_t Serial_Power(uint32_t base,uint32_t exp)
 }
 
 /*
-Send Numbers to tx port
+Send Numbers to UART4 port
 */
 void Serial_SendNum(uint32_t num)
 {
@@ -108,7 +115,7 @@ void Serial_SendNum(uint32_t num)
 
 
 /*
-Send strings to tx port
+Send strings to UART4 port
 */
 void Serial_SendStr(char *string)
 {
@@ -118,6 +125,9 @@ void Serial_SendStr(char *string)
 	}
 }
 
+/*
+ * Send strings to given UART port.
+ */
 void Serial_SendStr_t(char *string,UART_HandleTypeDef *huart)
 {
 	for(uint16_t itor_sndstr=0;string[itor_sndstr]!=0;itor_sndstr++)
@@ -127,9 +137,12 @@ void Serial_SendStr_t(char *string,UART_HandleTypeDef *huart)
 }
 
 
+//////////////////////////////////////////////////////////////////////////
+/*--------------------------printf redirect-----------------------------*/
+//////////////////////////////////////////////////////////////////////////
 
 /*
-REPLACES the fputc() function used in the implementation of printf()
+ * REPLACES the fputc() function used in the implementation of printf()
 */
 int fputc(int ch,FILE *f)
 {
@@ -140,7 +153,7 @@ int fputc(int ch,FILE *f)
 
 
 /*
-Encapsulated printf function for formatted strings to all ports.
+*Encapsulated printf function for formatted strings to all ports.
 NOTE:
 If wish to use Chinese characters, first add "--no-multibyte-chars" argument to the Misc Control in Target Options,
 then change the serial port coding to "UTF-8" compatible.
@@ -156,15 +169,27 @@ void Serial_printf(const char *formatted,...)
 	Serial_SendStr(String);
 }
 
+/*
+ * Variant of printf for other UART ports
+ */
+void Serial_printf_t(UART_HandleTypeDef *huart, const char *formatted,...)
+{
+	char String[100];
+	va_list	args;
+	va_start(args,formatted);
+	vsprintf(String,formatted,args);
+	va_end(args);
+	Serial_SendStr_t(String,huart);
+	Serial_printf(String);
+}
 
-//////////////////////////////////////////////////////////
-//SEND TO SCREEN
+
+//////////////////////////////////////////////////////////////////
+/*-----------------------SEND TO SCREEN-------------------------*/
+//////////////////////////////////////////////////////////////////
 
 
-
-
-
-//usually no need to use this, since the commands for the screen are better inputted like strings. 
+//usually no need to use this, since the commands for the screen are better inputted like strings.
 //THIS ONE INCLUDES THE EXTRA BIT NEEDED FOR COMMAND INPUTTING
 void Screen_SendArr(uint8_t *array,uint16_t length)
 {
@@ -191,7 +216,10 @@ void Screen_SendArr(uint8_t *array,uint16_t length)
 	Serial_SendByte_t(0xFF,huart_screen);
 }
 
-
+/*
+ * Send an array to UART5(serial screen)'s display message(integrated command)
+ * FB:FB_ON|FB_OFF, indicates whether send to UART4 or not
+ */
 void Screen_SendArrToShow(uint8_t *array,uint16_t length,uint8_t FB)
 {
 	
@@ -223,7 +251,9 @@ void Screen_SendArrToShow(uint8_t *array,uint16_t length,uint8_t FB)
 	Serial_SendByte_t(0xFF,huart_screen);
 }
 
-
+/*
+ * Send a string to UART5(command postfix attached)
+ */
 void Screen_SendStr(char *string,uint8_t FB)
 {
 	//FEEDBACK TO UART4
@@ -250,6 +280,9 @@ void Screen_SendStr(char *string,uint8_t FB)
 	Serial_SendByte_t(0xFF,huart_screen);
 }
 
+/*
+ * Send a string to UART5(no postfix attached)
+ */
 void Screen_SendStr_b(char *string)
 {
 	
@@ -261,7 +294,9 @@ void Screen_SendStr_b(char *string)
 	}
 }
 
-
+/*
+ * Send a string to UART5(serial screen)'s display message(integrated command)
+ */
 void Screen_SendStrToShow(char *string,uint8_t FB)
 {
 	//FEEDBACK TO UART4
@@ -294,7 +329,9 @@ void Screen_SendStrToShow(char *string,uint8_t FB)
 }
 
 
-
+/*
+ * Send a number to UART5(no command)
+ */
 void Screen_SendNum(uint32_t num)
 {
 	uint16_t length=0;
@@ -313,7 +350,9 @@ void Screen_SendNum(uint32_t num)
 }
 
 
-
+/*
+ * Send a number to UART5(serial screen)'s display message
+ */
 void Screen_SendNumToShow(uint32_t num)
 {
 	uint16_t length=0;
@@ -355,15 +394,15 @@ void Screen_SendNumToShow(uint32_t num)
 //RECEIVE PART
 
 
-uint8_t USART4_RX_BUF[USART_REC_LEN];     //½ÓÊÕ»º³å,×î´óUSART_REC_LEN¸ö×Ö½Ú. An Array! Use the sendArr function
+uint8_t USART4_RX_BUF[USART_REC_LEN];     //ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½USART_REC_LENï¿½ï¿½ï¿½Ö½ï¿½. An Array! Use the sendArr function
 uint8_t USART5_RX_BUF[USART_REC_LEN];
 
-//½ÓÊÕ×´Ì¬
-//bit15£¬	½ÓÊÕÍê³É±êÖ¾
-//bit14£¬	½ÓÊÕµ½0x0d
-//bit13~0£¬	½ÓÊÕµ½µÄÓÐÐ§×Ö½ÚÊýÄ¿-----Ö¸¶¨Ð´ÈëRX_BUFµÄindex
-uint16_t USART4_RX_STA=0;       //½ÓÊÕ×´Ì¬±ê¼Ç	
-uint8_t aRxBuffer[RXBUFFERSIZE];//HAL¿âÊ¹ÓÃµÄ´®¿Ú½ÓÊÕ»º³å
+//ï¿½ï¿½ï¿½ï¿½×´Ì¬
+//bit15ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É±ï¿½Ö¾
+//bit14ï¿½ï¿½	ï¿½ï¿½ï¿½Õµï¿½0x0d
+//bit13~0ï¿½ï¿½	ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ö½ï¿½ï¿½ï¿½Ä¿-----Ö¸ï¿½ï¿½Ð´ï¿½ï¿½RX_BUFï¿½ï¿½index
+uint16_t USART4_RX_STA=0;       //ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½	
+uint8_t aRxBuffer[RXBUFFERSIZE];//HALï¿½ï¿½Ê¹ï¿½ÃµÄ´ï¿½ï¿½Ú½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½
 
 uint16_t USART5_RX_STA=0;
 uint8_t aRxBuffer5[RXBUFFERSIZE];
@@ -374,20 +413,20 @@ uint16_t uart_rx_len=0;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	//Serial_printf("RxCpltCallback() tag\r\n");
-	if(huart->Instance==UART4)//Èç¹ûÊÇ´®¿Ú4
+	if(huart->Instance==UART4)//ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½4
 	{
-		if((USART4_RX_STA&0x8000)==0)//½ÓÊÕÎ´Íê³É
+		if((USART4_RX_STA&0x8000)==0)//ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½
 		{
-			if(USART4_RX_STA&0x4000)//½ÓÊÕµ½ÁË0x0d
+			if(USART4_RX_STA&0x4000)//ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½0x0d
 			{
-				if(aRxBuffer[0]!=0x0a)USART4_RX_STA=0;//½ÓÊÕ´íÎó,ÖØÐÂ¿ªÊ¼
+				if(aRxBuffer[0]!=0x0a)USART4_RX_STA=0;//ï¿½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Â¿ï¿½Ê¼
 				else 
 				{	
-					USART4_RX_STA|=0x8000;	//½ÓÊÕÍê³ÉÁË 
+					USART4_RX_STA|=0x8000;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 					//printf("USART4_RX_BUF[%d]:%s\r\n",USART4_RX_STA,USART4_RX_BUF);	
 				}				
 			}
-			else //»¹Ã»ÊÕµ½0X0D
+			else //ï¿½ï¿½Ã»ï¿½Õµï¿½0X0D
 			{	
 				if(aRxBuffer[0]==0x0d)
 					USART4_RX_STA|=0x4000;
@@ -397,28 +436,28 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 					USART4_RX_STA++;
 					if(USART4_RX_STA>(USART_REC_LEN-1))
 					{	
-						USART4_RX_STA=0;//½ÓÊÕÊý¾Ý´íÎó,ÖØÐÂ¿ªÊ¼½ÓÊÕ	 
-							//reply_er();//ÔÝ²»±¨´í
+						USART4_RX_STA=0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Â¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½	 
+							//reply_er();//ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½
 					}
 				}		 
 			}
 		}
 	}
 	
-	if(huart->Instance==UART5)//Èç¹ûÊÇ´®¿Ú5
+	if(huart->Instance==UART5)//ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½5
 	{
-		if((USART5_RX_STA&0x8000)==0)//½ÓÊÕÎ´Íê³É
+		if((USART5_RX_STA&0x8000)==0)//ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½
 		{
-			if(USART5_RX_STA&0x4000)//½ÓÊÕµ½ÁË0x0d
+			if(USART5_RX_STA&0x4000)//ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½0x0d
 			{
-				if(aRxBuffer5[0]!=0x0a)USART5_RX_STA=0;//½ÓÊÕ´íÎó,ÖØÐÂ¿ªÊ¼
+				if(aRxBuffer5[0]!=0x0a)USART5_RX_STA=0;//ï¿½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Â¿ï¿½Ê¼
 				else 
 				{	
-					USART5_RX_STA|=0x8000;	//½ÓÊÕÍê³ÉÁË 
+					USART5_RX_STA|=0x8000;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 					//printf("USART4_RX_BUF[%d]:%s\r\n",USART4_RX_STA,USART4_RX_BUF);	
 				}				
 			}
-			else //»¹Ã»ÊÕµ½0X0D
+			else //ï¿½ï¿½Ã»ï¿½Õµï¿½0X0D
 			{	
 				if(aRxBuffer5[0]==0x0d)
 					USART5_RX_STA|=0x4000;
@@ -428,8 +467,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 					USART5_RX_STA++;
 					if(USART5_RX_STA>(USART_REC_LEN-1))
 					{	
-						USART5_RX_STA=0;//½ÓÊÕÊý¾Ý´íÎó,ÖØÐÂ¿ªÊ¼½ÓÊÕ	 
-							//reply_er();//ÔÝ²»±¨´í
+						USART5_RX_STA=0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Â¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½	 
+							//reply_er();//ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½
 					}
 				}		 
 			}
@@ -439,73 +478,73 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	
 }
 
-//´®¿Ú4ÖÐ¶Ï·þÎñ³ÌÐò£¨³ýÁË³¬Ê±ºÍ´íÎó½ÓÊÜ´¦ÀíºÍcubeÉú³ÉÒ»ÖÂ£©
-void UART4_IRQHandler(void)                	
-{ 
-	//Serial_printf("UART4_IRQHandler() tag\r\n");
-	uint32_t timeout=0;
-	uint32_t maxDelay=0x1FFFF;
-	
-	HAL_UART_IRQHandler(huart_debug);	//µ÷ÓÃHAL¿âÖÐ¶Ï´¦Àí¹«ÓÃº¯Êý
-	
-	timeout=0;
-	while (HAL_UART_GetState(huart_debug) != HAL_UART_STATE_READY)//µÈ´ý¾ÍÐ÷
-	{
-	 timeout++;////³¬Ê±´¦Àí
-		 if(timeout>maxDelay) 
-		{ 
-			//reply_er();
-			break;	
-		}			 
-	}
-     
-	timeout=0;
-	while(HAL_UART_Receive_IT(huart_debug, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//Ò»´Î´¦ÀíÍê³ÉÖ®ºó£¬ÖØÐÂ¿ªÆôÖÐ¶Ï²¢ÉèÖÃRxXferCountÎª1
-	{
-	 timeout++; //³¬Ê±´¦Àí
-	 if(timeout>maxDelay) 
-	 { 
-		 //reply_er();
-		break;	
-	 }
-	}
-	
-
-}
-
-
-
-void UART5_IRQHandler(void)                	
-{ 
-	//Serial_printf("UART5_IRQHandler() tag\r\n");
-	uint32_t timeout=0;
-	uint32_t maxDelay=0x1FFFF;
-	
-	HAL_UART_IRQHandler(huart_screen);	//µ÷ÓÃHAL¿âÖÐ¶Ï´¦Àí¹«ÓÃº¯Êý
-	
-	timeout=0;
-	while (HAL_UART_GetState(huart_screen) != HAL_UART_STATE_READY)//µÈ´ý¾ÍÐ÷
-	{
-	 timeout++;////³¬Ê±´¦Àí
-		 if(timeout>maxDelay) 
-		{ 
-			//reply_er();
-			break;	
-		}			 
-	}
-     
-	timeout=0;
-	while(HAL_UART_Receive_IT(huart_screen, (uint8_t *)aRxBuffer5, RXBUFFERSIZE) != HAL_OK)//Ò»´Î´¦ÀíÍê³ÉÖ®ºó£¬ÖØÐÂ¿ªÆôÖÐ¶Ï²¢ÉèÖÃRxXferCountÎª1
-	{
-	 timeout++; //³¬Ê±´¦Àí
-	 if(timeout>maxDelay) 
-	 { 
-		 //reply_er();
-		break;	
-	 }
-	}
-	
-}
+//Modified UART4&UART5 handler
+// void UART4_IRQHandler(void)
+// {
+// 	//Serial_printf("UART4_IRQHandler() tag\r\n");
+// 	uint32_t timeout=0;
+// 	uint32_t maxDelay=0x1FFFF;
+//
+// 	HAL_UART_IRQHandler(huart_debug);	//ï¿½ï¿½ï¿½ï¿½HALï¿½ï¿½ï¿½Ð¶Ï´ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½
+//
+// 	timeout=0;
+// 	while (HAL_UART_GetState(huart_debug) != HAL_UART_STATE_READY)//ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½
+// 	{
+// 	 timeout++;////ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+// 		 if(timeout>maxDelay)
+// 		{
+// 			//reply_er();
+// 			break;
+// 		}
+// 	}
+//
+// 	timeout=0;
+// 	while(HAL_UART_Receive_IT(huart_debug, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//Ò»ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½Ð¶Ï²ï¿½ï¿½ï¿½ï¿½ï¿½RxXferCountÎª1
+// 	{
+// 	 timeout++; //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+// 	 if(timeout>maxDelay)
+// 	 {
+// 		 //reply_er();
+// 		break;
+// 	 }
+// 	}
+//
+//
+// }
+//
+//
+//
+// void UART5_IRQHandler(void)
+// {
+// 	//Serial_printf("UART5_IRQHandler() tag\r\n");
+// 	uint32_t timeout=0;
+// 	uint32_t maxDelay=0x1FFFF;
+//
+// 	HAL_UART_IRQHandler(huart_screen);	//ï¿½ï¿½ï¿½ï¿½HALï¿½ï¿½ï¿½Ð¶Ï´ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½
+//
+// 	timeout=0;
+// 	while (HAL_UART_GetState(huart_screen) != HAL_UART_STATE_READY)//ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½
+// 	{
+// 	 timeout++;////ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+// 		 if(timeout>maxDelay)
+// 		{
+// 			//reply_er();
+// 			break;
+// 		}
+// 	}
+//
+// 	timeout=0;
+// 	while(HAL_UART_Receive_IT(huart_screen, (uint8_t *)aRxBuffer5, RXBUFFERSIZE) != HAL_OK)//Ò»ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½Ð¶Ï²ï¿½ï¿½ï¿½ï¿½ï¿½RxXferCountÎª1
+// 	{
+// 	 timeout++; //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+// 	 if(timeout>maxDelay)
+// 	 {
+// 		 //reply_er();
+// 		break;
+// 	 }
+// 	}
+//
+// }
 
 //SEND THE DATA FROM UART4 TO BOTH UART4 and UART5
 void print2serial(void)

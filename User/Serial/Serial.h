@@ -5,9 +5,9 @@
 #include <stdarg.h>
 //#include "stm32h7xx_hal.h"
 
-#define USART_REC_LEN  			1500  	//¶¨Òå×î´ó½ÓÊÕ×Ö½ÚÊý 200
+#define USART_REC_LEN  			1500  	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ 200
 
-#define RXBUFFERSIZE   1 //»º´æ´óÐ¡
+#define RXBUFFERSIZE   1 //ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡
 
 
 
@@ -16,12 +16,15 @@
 
 extern UART_HandleTypeDef *huart_screen;
 extern UART_HandleTypeDef *huart_debug;
-extern uint8_t USART4_RX_BUF[USART_REC_LEN];     //½ÓÊÕ»º³å,×î´óUSART_REC_LEN¸ö×Ö½Ú.
-extern uint16_t USART4_RX_STA;       //½ÓÊÕ×´Ì¬±ê¼Ç
+extern uint8_t USART4_RX_BUF[USART_REC_LEN];     //ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½USART_REC_LENï¿½ï¿½ï¿½Ö½ï¿½.
+extern uint16_t USART4_RX_STA;       //ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½
 
 
-extern uint8_t USART5_RX_BUF[USART_REC_LEN];     //½ÓÊÕ»º³å,×î´óUSART_REC_LEN¸ö×Ö½Ú.
-extern uint16_t USART5_RX_STA;       //½ÓÊÕ×´Ì¬±ê¼Ç
+extern uint8_t USART5_RX_BUF[USART_REC_LEN];     //ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½USART_REC_LENï¿½ï¿½ï¿½Ö½ï¿½.
+extern uint16_t USART5_RX_STA;       //ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½
+
+extern uint8_t aRxBuffer[RXBUFFERSIZE];
+extern uint8_t aRxBuffer5[RXBUFFERSIZE];
 
 
 void Serial_SendByte(uint8_t Byte);
@@ -37,6 +40,7 @@ void Serial_SendStr(char *string);
 void Serial_SendStr_t(char *string,UART_HandleTypeDef *huart);
 
 void Serial_printf(const char *formatted,...);
+void Serial_printf_t(UART_HandleTypeDef *huart, const char *formatted,...);
 
 void Screen_SendArr(uint8_t *array,uint16_t length);
 void Screen_SendStr(char *string,uint8_t FB);

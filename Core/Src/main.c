@@ -21,16 +21,22 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Serial.h"
+
+#include "ADC_Custom.h"
+
 #include "Key2.h"
 
 #include "AD9959.h"
+
 #include "delay.h"
+
 #include "ch455.h"
 
 /* USER CODE END Includes */
@@ -55,8 +61,8 @@
 /* USER CODE BEGIN PV */
 
 //extern const unsigned char BCD_decode_tab[0x10];
-//extern uint16_t CH455_KEY_RX_FLAG; //���̽���״̬���	
-//extern uint8_t CH455_KEY_NUM;			//���¼��̵�ֵ
+//extern uint16_t CH455_KEY_RX_FLAG;
+//extern uint8_t CH455_KEY_NUM;
 
 
 /*
@@ -185,13 +191,15 @@ int main(void)
   MX_UART4_Init();
   MX_UART5_Init();
   MX_ADC1_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-	
+
+	HAL_TIM_Base_Start(&htim1);//tim1 init
+	HAL_ADC_Start_DMA(&hadc1,g_adc1_dma_data1,ADC_DATA_LENGTH);
 	
 	
 	//printf("before delay\r\n");
 	delay_init(480);
-	
 	delay_ms(10);
 	
 	
@@ -207,7 +215,7 @@ int main(void)
 	//Serial_printf("DDS2\r\n");
 
 
-	//CH455 Matrix Display
+	//CH455 Matrix Display(OBSELETE)
 	// CH455_init();
 	// CH455_Display(1,a);
 	// CH455_Display(2,b);
@@ -219,25 +227,26 @@ int main(void)
 	
 	
 	__HAL_UART_ENABLE_IT(huart_debug, UART_IT_RXNE);
-	Serial_printf("\r\nIT_RXNE ENABLED\r\n");
-	
-/////////////////////////////////////////////////////TEST TRANSMISSION
+	//Serial_printf("\r\nIT_RXNE ENABLED\r\n");
+
+
 	Serial_printf("\r\n===========INITIALIZATION COMPLETE==========\r\n\n");
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+	while (1)
+	{
 	  
-    /* USER CODE END WHILE */
+	/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	
-		print2serial();
-		print2screen();
-	  
+	ADC_DMA_Output();
+
+	print2serial();
+	print2screen();
+
   }
   /* USER CODE END 3 */
 }
