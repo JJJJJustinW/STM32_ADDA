@@ -194,8 +194,13 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
+	// printf("before TIM\r\n");
 	HAL_TIM_Base_Start(&htim1);//tim1 init
+	// printf("before ADC\r\n");
+	HAL_ADC_Start_IT(&hadc1);
+
 	HAL_ADC_Start_DMA(&hadc1,g_adc1_dma_data1,ADC_DATA_LENGTH);
+	// printf("after ADC\r\n");
 	
 	//printf("before delay\r\n");
 	delay_init(480);
@@ -231,13 +236,14 @@ int main(void)
 
 	Serial_printf("\r\n===========INITIALIZATION COMPLETE==========\r\n\n");
 
+	//printf("debug flag 1\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
-	  
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
