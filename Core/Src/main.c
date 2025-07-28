@@ -216,7 +216,7 @@ int main(void)
 	AD9959_SetAmp4Channel(CW_amp,0,0,0);
 	IO_Update();
 	Write_frequence(0,2000000);
-	Write_Amplitude(0,1023);
+	Write_Amplitude(0,2047);
 	Write_Phase(0,0);
 	//Serial_printf("DDS2\r\n");
 
@@ -251,8 +251,8 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	ADC_DMA_Output();
 
-	print2serial();
-	print2screen();
+	print4serial();
+	print4screen();
 
   }
   /* USER CODE END 3 */

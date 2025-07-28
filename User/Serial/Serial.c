@@ -212,7 +212,7 @@ void Serial_printf_t(UART_HandleTypeDef *huart, const char *formatted,...)
 	Serial_SendStr_t(String,huart);
 
 	//Send to UART4
-	Serial_SendStr(String);
+	//Serial_SendStr(String);
 }
 
 
@@ -317,8 +317,7 @@ void Screen_SendStr(char *string,uint8_t FB)
  */
 void Screen_SendStr_b(char *string)
 {
-	
-	
+
 	//SEND TO UART5
 	for(uint16_t itor_scrsndstr=0;string[itor_scrsndstr]!=0;itor_scrsndstr++)
 	{
@@ -511,83 +510,89 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 }
 
 //Modified UART4&UART5 handler
-//void UART4_IRQHandler(void)
-//{
-//	//Serial_printf("UART4_IRQHandler() tag\r\n");
-//	uint32_t timeout=0;
-//	uint32_t maxDelay=0x1FFFF;
-
-//	HAL_UART_IRQHandler(huart_debug);	//����HAL���жϴ����ú���
-
-//	timeout=0;
-//	while (HAL_UART_GetState(huart_debug) != HAL_UART_STATE_READY)//�ȴ�����
-//	{
-//	 timeout++;////��ʱ����
-//		 if(timeout>maxDelay)
-//		{
-//			//reply_er();
-//			break;
-//		}
-//	}
-
-//	timeout=0;
-//	while(HAL_UART_Receive_IT(huart_debug, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
-//	{
-//	 timeout++; //��ʱ����
-//	 if(timeout>maxDelay)
-//	 {
-//		 //reply_er();
-//		break;
-//	 }
-//	}
-
-
-//}
+// void UART4_IRQHandler(void)
+// {
+// 	//Serial_printf("UART4_IRQHandler() tag\r\n");
+// 	uint32_t timeout=0;
+// 	uint32_t maxDelay=0x1FFFF;
+//
+// 	HAL_UART_IRQHandler(huart_debug);	//����HAL���жϴ����ú���
+//
+// 	timeout=0;
+// 	while (HAL_UART_GetState(huart_debug) != HAL_UART_STATE_READY)//�ȴ�����
+// 	{
+// 	 timeout++;////��ʱ����
+// 		 if(timeout>maxDelay)
+// 		{
+// 			//reply_er();
+// 			break;
+// 		}
+// 	}
+//
+// 	timeout=0;
+// 	while(HAL_UART_Receive_IT(huart_debug, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
+// 	{
+// 	 timeout++; //��ʱ����
+// 	 if(timeout>maxDelay)
+// 	 {
+// 		 //reply_er();
+// 		break;
+// 	 }
+// 	}
 //
 //
+// }
 //
-//void UART5_IRQHandler(void)
-//{
-//	//Serial_printf("UART5_IRQHandler() tag\r\n");
-//	uint32_t timeout=0;
-//	uint32_t maxDelay=0x1FFFF;
-
-//	HAL_UART_IRQHandler(huart_screen);	//����HAL���жϴ����ú���
-
-//	timeout=0;
-//	while (HAL_UART_GetState(huart_screen) != HAL_UART_STATE_READY)//�ȴ�����
-//	{
-//	 timeout++;////��ʱ����
-//		 if(timeout>maxDelay)
-//		{
-//			//reply_er();
-//			break;
-//		}
-//	}
-
-//	timeout=0;
-//	while(HAL_UART_Receive_IT(huart_screen, (uint8_t *)aRxBuffer5, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
-//	{
-//	 timeout++; //��ʱ����
-//	 if(timeout>maxDelay)
-//	 {
-//		 //reply_er();
-//		break;
-//	 }
-//	}
-
-//}
+//
+// void UART5_IRQHandler(void)
+// {
+// 	//Serial_printf("UART5_IRQHandler() tag\r\n");
+// 	uint32_t timeout=0;
+// 	uint32_t maxDelay=0x1FFFF;
+//
+// 	HAL_UART_IRQHandler(huart_screen);	//����HAL���жϴ����ú���
+//
+// 	timeout=0;
+// 	while (HAL_UART_GetState(huart_screen) != HAL_UART_STATE_READY)//�ȴ�����
+// 	{
+// 	 timeout++;////��ʱ����
+// 		 if(timeout>maxDelay)
+// 		{
+// 			//reply_er();
+// 			break;
+// 		}
+// 	}
+//
+// 	timeout=0;
+// 	while(HAL_UART_Receive_IT(huart_screen, (uint8_t *)aRxBuffer5, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
+// 	{
+// 	 timeout++; //��ʱ����
+// 	 if(timeout>maxDelay)
+// 	 {
+// 		 //reply_er();
+// 		break;
+// 	 }
+// 	}
+//
+// }
 
 //SEND THE DATA FROM UART4 TO BOTH UART4 and UART5
-void print2serial(void)
+void print4serial(void)
 {
 	if(USART4_RX_STA&0x8000)
 	{
 		uart_rx_len=USART4_RX_STA&0x3fff;
 		Serial_printf("\r\nsent data:\r\n");
-//			HAL_UART_Transmit_IT(&huart3,(uint8_t*)USART_RX_BUF,len);
 //		HAL_UART_Transmit(&huart4,(uint8_t*)USART_RX_BUF,uart_rx_len,1000);  //Original print
+
 		Serial_SendArr((uint8_t*)USART4_RX_BUF,uart_rx_len);
+
+		/*---If the array is a command it will work---*/
+		Screen_SendArr((uint8_t*)USART4_RX_BUF,uart_rx_len);
+		Serial_SendByte_t(0xFF,huart_screen);
+		Serial_SendByte_t(0xFF,huart_screen);
+		Serial_SendByte_t(0xFF,huart_screen);
+
 		Screen_SendArrToShow((uint8_t*)USART4_RX_BUF,uart_rx_len,FB_OFF);
 		Serial_printf("\r\n");
 		while(__HAL_UART_GET_FLAG(&huart4,UART_FLAG_TC)!=SET);		
@@ -597,7 +602,7 @@ void print2serial(void)
 
 
 //SEND THE DATA FROM UART5 TO UART4
-void print2screen(void)
+void print4screen(void)
 {
 	if(USART5_RX_STA&0x8000)
 	{

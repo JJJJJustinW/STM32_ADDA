@@ -1,6 +1,6 @@
 Dependencies for Project 'H750Sver4', Target 'H750Sver4': (DO NOT MODIFY !)
 F (startup_stm32h750xx.s)(0x68871E96)(--cpu Cortex-M7.fp.dp -g --apcs=interwork -I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include--pd "__UVISION_VERSION SETA 524" --pd "_RTE_ SETA 1" --pd "STM32H750xx SETA 1"--list startup_stm32h750xx.lst --xref -o h750sver4\startup_stm32h750xx.o --depend h750sver4\startup_stm32h750xx.d)
-F (../Core/Src/main.c)(0x688724BF)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\main.o --omf_browse h750sver4\main.crf --depend h750sver4\main.d)
+F (../Core/Src/main.c)(0x688775AC)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\main.o --omf_browse h750sver4\main.crf --depend h750sver4\main.d)
 I (../Core/Inc/main.h)(0x68831E2F)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x68599C2B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x68865942)
@@ -45,10 +45,10 @@ I (../Core/Inc/dma.h)(0x6882F0AC)
 I (../Core/Inc/tim.h)(0x688661F2)
 I (../Core/Inc/usart.h)(0x6882F0AC)
 I (../Core/Inc/gpio.h)(0x6882F0AC)
-I (..\User\Serial\Serial.h)(0x68852157)
+I (..\User\Serial\Serial.h)(0x68872BEB)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x588B8344)
-I (..\User\ADC\ADC_Custom.h)(0x6886FA1D)
+I (..\User\ADC\ADC_Custom.h)(0x68874013)
 I (..\User\DoubleKeys\Key2.h)(0x6883C122)
 I (..\User\DDS\AD9959.h)(0x6882F0AC)
 I (..\User\Delay\delay.h)(0x6882F0AC)
@@ -299,7 +299,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x68599C2B)
 I (../Core/Inc/stm32h7xx_it.h)(0x688724AB)
-I (..\User\Serial\Serial.h)(0x68852157)
+I (..\User\Serial\Serial.h)(0x68872BEB)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x588B8344)
 F (../Core/Src/stm32h7xx_hal_msp.c)(0x68865942)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\stm32h7xx_hal_msp.o --omf_browse h750sver4\stm32h7xx_hal_msp.crf --depend h750sver4\stm32h7xx_hal_msp.d)
@@ -1239,10 +1239,10 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x68599C2B)
-F (..\User\ADC\ADC_Custom.c)(0x6886FA1D)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\adc_custom.o --omf_browse h750sver4\adc_custom.crf --depend h750sver4\adc_custom.d)
+F (..\User\ADC\ADC_Custom.c)(0x68874404)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\adc_custom.o --omf_browse h750sver4\adc_custom.crf --depend h750sver4\adc_custom.d)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x588B8344)
-I (..\User\ADC\ADC_Custom.h)(0x6886FA1D)
+I (..\User\ADC\ADC_Custom.h)(0x68874013)
 I (../Core/Inc/adc.h)(0x6882F0AC)
 I (../Core/Inc/main.h)(0x68831E2F)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x68599C2B)
@@ -1283,7 +1283,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x68599C2B)
-I (..\User\Serial\Serial.h)(0x68852157)
+I (..\User\Serial\Serial.h)(0x68872BEB)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x588B8344)
 F (..\User\CH455\ch455.c)(0x6882F0AC)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\ch455.o --omf_browse h750sver4\ch455.crf --depend h750sver4\ch455.d)
 I (..\User\CH455\ch455.h)(0x6882F0AC)
@@ -1449,7 +1449,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x68599C2B)
 I (..\User\DoubleKeys\Key2.h)(0x6883C122)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x588B8344)
-I (..\User\Serial\Serial.h)(0x68852157)
+I (..\User\Serial\Serial.h)(0x68872BEB)
 I (..\User\Delay\delay.h)(0x6882F0AC)
 F (..\User\IIC\myiic.c)(0x6882F0AC)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\myiic.o --omf_browse h750sver4\myiic.crf --depend h750sver4\myiic.d)
 I (..\User\IIC\myiic.h)(0x6882F0AC)
@@ -1492,7 +1492,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x68599C2B)
 I (..\User\Delay\delay.h)(0x6882F0AC)
-F (..\User\Serial\Serial.c)(0x68872171)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\serial.o --omf_browse h750sver4\serial.crf --depend h750sver4\serial.d)
+F (..\User\Serial\Serial.c)(0x6887395A)(--c99 -c --cpu Cortex-M7.fp.dp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ..\User\ADC -I ..\User\CH455 -I ..\User\DDS -I ..\User\Delay -I ..\User\DoubleKeys -I ..\User\IIC -I ..\User\Serial-I.\RTE\_H750Sver4-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32H750xx -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H750xx-o h750sver4\serial.o --omf_browse h750sver4\serial.crf --depend h750sver4\serial.d)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x68599C2B)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x68865942)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h)(0x68599C2B)
@@ -1533,6 +1533,6 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x68599C2B)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x68599C2B)
 I (../Core/Inc/usart.h)(0x6882F0AC)
 I (../Core/Inc/main.h)(0x68831E2F)
-I (..\User\Serial\Serial.h)(0x68852157)
+I (..\User\Serial\Serial.h)(0x68872BEB)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x588B8344)
