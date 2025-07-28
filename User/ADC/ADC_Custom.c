@@ -3,6 +3,8 @@
 //
 #include <stdio.h>
 
+#include "string.h"
+
 #include "ADC_Custom.h"
 
 #include "Serial.h"

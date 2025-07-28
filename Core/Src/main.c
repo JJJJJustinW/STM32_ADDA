@@ -95,7 +95,7 @@ Pins: 	PC12-->LED4(PC6),PE3-->LED5(PC7)
 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	//delay_ms(50);
+	delay_ms(50);
 	if(GPIO_Pin==GPIO_PIN_2)
 	{
 		if(GPIO_PIN_RESET==HAL_GPIO_ReadPin(GPIOE,GPIO_PIN_2))
@@ -188,11 +188,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
+  MX_UART4_Init();
+  MX_UART5_Init();
   MX_ADC1_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
-  MX_UART4_Init();
-  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
 
 	// printf("before TIM\r\n");
@@ -205,19 +205,19 @@ int main(void)
 
 	
 	//printf("before delay\r\n");
-	// delay_init(480);
-	// delay_ms(10);
+	delay_init(480);
+	delay_ms(10);
 
 
 	//Serial_printf("DDS1\r\n");
-	// Init_AD9959();
-	// AD9959_SetPhase4Channel(0,0,0,0);
-	// AD9959_SetFrequency4Channel(CW_fre,0,0,0);
-	// AD9959_SetAmp4Channel(CW_amp,0,0,0);
-	// IO_Update();
-	// Write_frequence(0,2000000);
-	// Write_Amplitude(0,1023);
-	// Write_Phase(0,0);
+	Init_AD9959();
+	AD9959_SetPhase4Channel(0,0,0,0);
+	AD9959_SetFrequency4Channel(CW_fre,0,0,0);
+	AD9959_SetAmp4Channel(CW_amp,0,0,0);
+	IO_Update();
+	Write_frequence(0,2000000);
+	Write_Amplitude(0,1023);
+	Write_Phase(0,0);
 	//Serial_printf("DDS2\r\n");
 
 

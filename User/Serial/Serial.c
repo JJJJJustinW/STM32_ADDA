@@ -511,72 +511,72 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 }
 
 //Modified UART4&UART5 handler
-// void UART4_IRQHandler(void)
-// {
-// 	//Serial_printf("UART4_IRQHandler() tag\r\n");
-// 	uint32_t timeout=0;
-// 	uint32_t maxDelay=0x1FFFF;
+//void UART4_IRQHandler(void)
+//{
+//	//Serial_printf("UART4_IRQHandler() tag\r\n");
+//	uint32_t timeout=0;
+//	uint32_t maxDelay=0x1FFFF;
+
+//	HAL_UART_IRQHandler(huart_debug);	//����HAL���жϴ����ú���
+
+//	timeout=0;
+//	while (HAL_UART_GetState(huart_debug) != HAL_UART_STATE_READY)//�ȴ�����
+//	{
+//	 timeout++;////��ʱ����
+//		 if(timeout>maxDelay)
+//		{
+//			//reply_er();
+//			break;
+//		}
+//	}
+
+//	timeout=0;
+//	while(HAL_UART_Receive_IT(huart_debug, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
+//	{
+//	 timeout++; //��ʱ����
+//	 if(timeout>maxDelay)
+//	 {
+//		 //reply_er();
+//		break;
+//	 }
+//	}
+
+
+//}
 //
-// 	HAL_UART_IRQHandler(huart_debug);	//����HAL���жϴ����ú���
-//
-// 	timeout=0;
-// 	while (HAL_UART_GetState(huart_debug) != HAL_UART_STATE_READY)//�ȴ�����
-// 	{
-// 	 timeout++;////��ʱ����
-// 		 if(timeout>maxDelay)
-// 		{
-// 			//reply_er();
-// 			break;
-// 		}
-// 	}
-//
-// 	timeout=0;
-// 	while(HAL_UART_Receive_IT(huart_debug, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
-// 	{
-// 	 timeout++; //��ʱ����
-// 	 if(timeout>maxDelay)
-// 	 {
-// 		 //reply_er();
-// 		break;
-// 	 }
-// 	}
 //
 //
-// }
-//
-//
-//
-// void UART5_IRQHandler(void)
-// {
-// 	//Serial_printf("UART5_IRQHandler() tag\r\n");
-// 	uint32_t timeout=0;
-// 	uint32_t maxDelay=0x1FFFF;
-//
-// 	HAL_UART_IRQHandler(huart_screen);	//����HAL���жϴ����ú���
-//
-// 	timeout=0;
-// 	while (HAL_UART_GetState(huart_screen) != HAL_UART_STATE_READY)//�ȴ�����
-// 	{
-// 	 timeout++;////��ʱ����
-// 		 if(timeout>maxDelay)
-// 		{
-// 			//reply_er();
-// 			break;
-// 		}
-// 	}
-//
-// 	timeout=0;
-// 	while(HAL_UART_Receive_IT(huart_screen, (uint8_t *)aRxBuffer5, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
-// 	{
-// 	 timeout++; //��ʱ����
-// 	 if(timeout>maxDelay)
-// 	 {
-// 		 //reply_er();
-// 		break;
-// 	 }
-// 	}
-//
-// }
+//void UART5_IRQHandler(void)
+//{
+//	//Serial_printf("UART5_IRQHandler() tag\r\n");
+//	uint32_t timeout=0;
+//	uint32_t maxDelay=0x1FFFF;
+
+//	HAL_UART_IRQHandler(huart_screen);	//����HAL���жϴ����ú���
+
+//	timeout=0;
+//	while (HAL_UART_GetState(huart_screen) != HAL_UART_STATE_READY)//�ȴ�����
+//	{
+//	 timeout++;////��ʱ����
+//		 if(timeout>maxDelay)
+//		{
+//			//reply_er();
+//			break;
+//		}
+//	}
+
+//	timeout=0;
+//	while(HAL_UART_Receive_IT(huart_screen, (uint8_t *)aRxBuffer5, RXBUFFERSIZE) != HAL_OK)//һ�δ������֮�����¿����жϲ�����RxXferCountΪ1
+//	{
+//	 timeout++; //��ʱ����
+//	 if(timeout>maxDelay)
+//	 {
+//		 //reply_er();
+//		break;
+//	 }
+//	}
+
+//}
 
 //SEND THE DATA FROM UART4 TO BOTH UART4 and UART5
 void print2serial(void)

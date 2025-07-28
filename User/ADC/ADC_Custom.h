@@ -4,7 +4,6 @@
 
 #ifndef ADC_CUSTOM_H
 #define ADC_CUSTOM_H
-#include "string.h"
 
 #include "adc.h"
 
